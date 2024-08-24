@@ -1,0 +1,7 @@
+country = "Россия"
+actor = "Кембербетч"
+ganre = "аниме"
+name = "Унесенные ветром"
+from_year = "2015"
+to_year = "2023"
+prem_month = "2024"
