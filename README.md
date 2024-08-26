@@ -20,7 +20,7 @@ data.py - в нем содержатся тестовые данные для в
 UI - pytest test_ui.py
 API - pytest test_api.py
 
-Сыылка на финальный проект:
+Сcылка на финальный проект: https://github.com/kikiarkh/DIPLOMA
 
 
 

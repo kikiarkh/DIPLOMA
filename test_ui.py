@@ -10,26 +10,33 @@ import allure
 def test_search_by_country(chrome_browser):
     search = Search(chrome_browser)
     result = search.Search_by_country(country)
-
+    with allure.step("Проверить совпадает ли список с выбранной страной"):
+        assert result == result_country
 
 @allure.title("Проверка поиска фильмов по актеру")
 def test_search_by_actor(chrome_browser):
     search = Search(chrome_browser)
     result = search.Searc_by_actor(actor)
+    with allure.step("Проверить, что в полученных фильмах есть запрашиваемый актер"):
+        assert result_actor in [item.text for item in result]
 
 @allure.title("Проверка поиска фильмов по названию")
 def test_search_by_name(chrome_browser):
     search = Search(chrome_browser)
     result = search.Search_by_name(name)
+    with allure.step("Проверить совпадает ли название фильма с полученным результатом"):
+        assert result == result_name
 
 @allure.title("Проверка поиска фильмов по годовому интервалу")
 def test_search_by_interval(chrome_browser):
     search = Search(chrome_browser)
     result = search.Search_by_interval(from_year, to_year)
+    with allure.step("Проверить, что первый в списке фильм совпадает с выбранным интервалом"):
+        assert result == result_to_year
 
 @allure.title("Проверка поиска фильмов по премьере")
 def test_search_by_premiere(chrome_browser):
     search = Search(chrome_browser)
-    result = search.Search_by_premiere(prem_month)
-
-#pytest test_ui.py
+    result = search.Search_by_premiere(prem_month, prem_year, prem_world)
+    with allure.step("Проверить, что год премьеры совпадает с результатом"):
+        assert result == result_year_premier
