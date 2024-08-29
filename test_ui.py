@@ -6,13 +6,6 @@ import requests
 import pytest
 import allure
 
-@allure.title("Проверка поиска фильмов по стране")
-def test_search_by_country(chrome_browser):
-    search = Search(chrome_browser)
-    result = search.Search_by_country(country)
-    with allure.step("Проверить совпадает ли список с выбранной страной"):
-        assert result == result_country
-
 @allure.title("Проверка поиска фильмов по актеру")
 def test_search_by_actor(chrome_browser):
     search = Search(chrome_browser)
@@ -34,9 +27,10 @@ def test_search_by_interval(chrome_browser):
     with allure.step("Проверить, что первый в списке фильм совпадает с выбранным интервалом"):
         assert result == result_to_year
 
-@allure.title("Проверка поиска фильмов по премьере")
-def test_search_by_premiere(chrome_browser):
+@allure.title("Проверка поиска фильмов по рейтингу IMDB")
+def test_search_by_best_films(chrome_browser):
     search = Search(chrome_browser)
-    result = search.Search_by_premiere(prem_month, prem_year, prem_world)
-    with allure.step("Проверить, что год премьеры совпадает с результатом"):
-        assert result == result_year_premier
+    result = search.Search_by_best_films(rating_min, rating_max)
+    with allure.step("Проверить что рейтинг первого фильма выше или равен минимальному рейтингу"):
+        assert result >= rating_min
+

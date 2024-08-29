@@ -2,21 +2,20 @@ import requests
 import pytest
 import allure
 from Data.constans import Base_URL, token
-from Data.data import genres
 
 @allure.title("Проверка поиска фильма по жанру")
 def test_search_by_genre():
     with allure.step("Произвести поиск по жанру и в заголовках передать токен"):
-        resp = requests.get(Base_URL + '/movie?page=1&limit=10&genres.name={genres}', headers={"X-API-KEY": token})
+        resp = requests.get(Base_URL + '/movie?page=1&limit=10&genres.name=фэнтези', headers={"X-API-KEY": token})
     with allure.step("Проверить, что статус код равен 200"):
         assert resp.status_code == 200
     with allure.step("Проверить, что полученный список фильмов не пустой"):
         data = resp.json() 
-        assert data["docs"] is not 0
+        assert data["docs"] != [], "Expected non-empty list of movies, but got an empty list."
     with allure.step("Проверить, что полученный список фильмов соответствует жанру"):
-        data = resp.json()
-        for item in data["docs"]:
-            assert item["name"] == genres
+        for movie in data["docs"]:
+            genres = [genre['name'] for genre in movie["genres"]]
+            assert 'фэнтези' in genres, f"Movie '{movie['title']}' is missing genre 'фэнтези'. Found genres: {genres}"
 
 @allure.title("Проверка поиска фильма по дате премьеры в мире")
 def test_search_by_premiere():
@@ -28,7 +27,6 @@ def test_search_by_premiere():
         data = resp.json() 
         assert data["docs"] is not 0
     with allure.step("Проверить, что полученный список фильмов соответствует году премьеры"):
-        data = resp.json()
         for item in data["docs"]:
             assert item["year"] == 2024
 
@@ -43,7 +41,6 @@ def test_search_by_imdb():
         data = resp.json() 
         assert data["docs"] is not 0
     with allure.step("Проверить, что полученный список фильмов соответствует рейтингу Imdb"):
-        data = resp.json()
         for item in data["docs"]:
             assert item["rating"]["imdb"] >= 7
 

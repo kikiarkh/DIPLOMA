@@ -50,25 +50,25 @@ class Search:
         result = self.browser.find_element(By.CSS_SELECTOR, "div.element:nth-child(4) > div:nth-child(3) > p:nth-child(1) > span:nth-child(2)").text
         return result
     
-    @allure.step("Произвести поиск фильмов по премьере")
-    def Search_by_premiere(self, prem_month, prem_year, prem_world):
-        self.browser.find_element(By.CSS_SELECTOR, "#prem_month").send_keys(prem_month)
-        self.browser.find_element(By.CSS_SELECTOR, '#prem_year').send_keys(prem_year)
-        self.browser.find_element(By.CSS_SELECTOR, '#prem_type').send_keys(prem_world)
-        self.browser.find_element(By.CSS_SELECTOR, '[id="formSearchMain"]>[value="поиск"]').click()
-        self.browser.find_element(By.CSS_SELECTOR, 'div.element:nth-child(12) > div:nth-child(3) > p:nth-child(1) > a:nth-child(1)').click()
-        result = self.browser.find_element(By.CSS_SELECTOR, 'div.styles_rowLight__P8Y_1:nth-child(17) > div:nth-child(2) > a:nth-child(1)').text
-        return result[-4:]
         
-
-
-        
-        
-
-
-
+    @allure.step("Произвести поиск по рейтингу IMDB")
+    def Search_by_best_films(self, rating_min, rating_max):
+        self.browser.find_element(By.CSS_SELECTOR, ".block_left_pad > table:nth-child(5) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > h1:nth-child(1) > a:nth-child(1)").click()
+        self.browser.find_element(By.CSS_SELECTOR, "#ex_rating_min").clear()
+        self.browser.find_element(By.CSS_SELECTOR, "#ex_rating_min").send_keys(rating_min)
+        self.browser.find_element(By.CSS_SELECTOR, "#ex_rating_max").clear()
+        self.browser.find_element(By.CSS_SELECTOR, "#ex_rating_max").send_keys(rating_max)
+        self.browser.find_element(By.CSS_SELECTOR, "input.nice_button:nth-child(45)").click()
+        result = self.browser.find_element(By.CSS_SELECTOR, "div.imdb").text
+        return result 
 
         
+    
+        
+        
+    
+
+
 
         
 

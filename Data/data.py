@@ -8,10 +8,10 @@ result_name = "Унесённые ветром"
 from_year = "2015"
 to_year = "2022"
 result_to_year = "2022"
-prem_month = "Январь"
-prem_year = "2024"
-prem_world = "Мире"
-result_year_premier = "2024"
+rating_min = "7"
+rating_max = "8"
 
-genres = "драма"
+
+
+
 
