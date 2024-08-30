@@ -6,6 +6,13 @@ import requests
 import pytest
 import allure
 
+@allure.title("Проверка поиска фильмов по стране")
+def test_search_by_country(chrome_browser):
+    search = Search(chrome_browser)
+    result = search.Search_by_country(country)
+    with allure.step("Проверить совпадает ли список с выбранной страной"):
+        assert result == result_country
+
 @allure.title("Проверка поиска фильмов по актеру")
 def test_search_by_actor(chrome_browser):
     search = Search(chrome_browser)
